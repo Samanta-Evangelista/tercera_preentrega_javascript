@@ -13,15 +13,17 @@ let productos = [
 
 let contenedor = document.getElementById("contenedorProductos")
  
-productos.forEach(producto => {debugger
+productos.forEach(producto => {
     let tarjeta = document.createElement("div")
     tarjeta.className = "tarjeta"
 
     tarjeta.innerHTML = `
     <h3>${producto.nombre}</h3>    
     <img src="./imagenes/${producto.rutaImagen}">    
-    <p>$${producto.precio}</p>`
-    
-    contenedor.appendChild(tarjeta)
+    <p>$${producto.precio}</p>
+    <button>Agregar al carrito</button>
+    `
+        contenedor.appendChild(tarjeta)
 }
 )
+
