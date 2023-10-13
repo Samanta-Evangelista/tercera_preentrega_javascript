@@ -12,10 +12,29 @@
 <body>
     <header>
         <div class="logo">KIOSCO ESTUDIANTIL</div>
-        <button id="carrito" class="btn btn-orange">Ver carrito</button>
+        <button id="carrito" class="btn btn-orange">Ver carrito <span id="idCantidadProductos"
+                class="badge bg-danger"></span></button>
     </header>
     <main class="container">
         <div id="contenedorProductos"></div>
+
+        <!-- Carrito -->
+        <div id="miCarrito" class="popup">
+            <div class="popup-contenido">
+                <h3>Carrito de Compras</h3>
+
+                <ul id="listaCarrito">
+                    <!-- Muestro los productos del carrito -->
+                </ul>
+
+
+                <btn class="btn btn-success" onclick="finalizarCompra()">Finalizar</btn>
+                <btn class="btn btn-danger" onclick="limpiarCarrito()">Limpiar</btn>
+                <btn class="btn btn-warning" onclick="cerrarCarrito()">Cerrar</btn>
+            </div>
+        </div>
+        <!-- Fin Carrito -->
+
     </main>
     <footer class="footer">
         <hr>
