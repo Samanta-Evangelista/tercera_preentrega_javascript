@@ -78,8 +78,20 @@ let carritoRecuperado = localStorage.getItem("carrito");
 
 if (carritoRecuperado) {
   carritoDeCompras = JSON.parse(carritoRecuperado);
-  document.getElementById("idCantidadProductos").innerHTML =
-    carritoDeCompras.length;
+  setearCantidadProductos();
+}
+
+function setearCantidadProductos() {
+  let cant = 0;
+  carritoDeCompras.forEach(function (producto) {
+    cant += producto.cantidad;
+  });
+
+  if (cant > 0) {
+    document.getElementById("idCantidadProductos").innerHTML = cant;
+  } else {
+    document.getElementById("idCantidadProductos").innerHTML = "";
+  }
 }
 
 let contenedor = document.getElementById("contenedorProductos");
@@ -116,9 +128,7 @@ function agregarAlCarrito(idProducto) {
   }
 
   localStorage.setItem("carrito", JSON.stringify(carritoDeCompras));
-
-  document.getElementById("idCantidadProductos").innerHTML =
-    carritoDeCompras.length;
+  setearCantidadProductos();
 }
 
 function buscarProductoPorId(id) {
@@ -158,7 +168,7 @@ function verCarrito() {
 function limpiarCarrito() {
   carritoDeCompras = [];
   localStorage.removeItem("carrito");
-  document.getElementById("idCantidadProductos").innerHTML = "";
+  setearCantidadProductos();
 }
 
 function finalizarCompra() {
@@ -169,7 +179,7 @@ function finalizarCompra() {
 
   carritoDeCompras = [];
   localStorage.removeItem("carrito");
-  document.getElementById("idCantidadProductos").innerHTML = "";
+  setearCantidadProductos();
 
   alert("Fin de la compra. Valor: $" + total + ". Gracias por su compra.");
 }
