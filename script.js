@@ -1,7 +1,7 @@
 let productos = [
   {
     id: 1,
-    nombre: "Alfajor jorgito negro",
+    nombre: "Alfajor Jorgito Negro",
     categoria: "golosinas",
     stock: 30,
     precio: 180,
@@ -9,7 +9,7 @@ let productos = [
   },
   {
     id: 2,
-    nombre: "Alfajor jorgito blanco",
+    nombre: "Alfajor Jorgito Blanco",
     categoria: "golosinas",
     stock: 30,
     precio: 180,
@@ -25,7 +25,7 @@ let productos = [
   },
   {
     id: 4,
-    nombre: "Pico dulce",
+    nombre: "Pico Dulce",
     categoria: "golosinas",
     stock: 50,
     precio: 150,
@@ -33,7 +33,7 @@ let productos = [
   },
   {
     id: 5,
-    nombre: "Papas fritas",
+    nombre: "Papas Fritas",
     categoria: "snack",
     stock: 25,
     precio: 350,
@@ -41,7 +41,7 @@ let productos = [
   },
   {
     id: 6,
-    nombre: "Palitos salados",
+    nombre: "Palitos Salados",
     categoria: "snack",
     stock: 25,
     precio: 250,
@@ -49,7 +49,7 @@ let productos = [
   },
   {
     id: 7,
-    nombre: "Agua mineral",
+    nombre: "Agua Mineral",
     categoria: "bebidas",
     stock: 30,
     precio: 300,
@@ -57,7 +57,7 @@ let productos = [
   },
   {
     id: 8,
-    nombre: "Jugo baggio multifruta",
+    nombre: "Jugo Baggio Multifruta",
     categoria: "bebidas",
     stock: 50,
     precio: 200,
@@ -65,13 +65,15 @@ let productos = [
   },
   {
     id: 9,
-    nombre: "Jugo baggio naranja",
+    nombre: "Jugo Baggio Naranja",
     categoria: "bebidas",
     stock: 50,
     precio: 200,
     rutaImagen: "baggionaranja.jpg",
   },
 ];
+
+let carritoDeCompras = [];
 
 let contenedor = document.getElementById("contenedorProductos");
 
@@ -81,9 +83,56 @@ productos.forEach((producto) => {
 
   tarjeta.innerHTML = `
     <h3>${producto.nombre}</h3>    
-    <img src="./imagenes/${producto.rutaImagen}">    
-    <p>$${producto.precio}</p>
-    <button class="btn btn-orange">Agregar al carrito</button>
+    <img src="./imagenes/${producto.rutaImagen}">
+    <p><strong>$${producto.precio}</strong></p>
+    <button class="btn btn-orange" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
     `;
   contenedor.appendChild(tarjeta);
 });
+
+function agregarAlCarrito(idProducto) {
+  const productoEncontrado = buscarProductoPorId(idProducto);
+
+  const productoExistente = carritoDeCompras.find(
+    (item) => item.id === productoEncontrado.id
+  );
+
+  if (productoExistente) {
+    productoExistente.cantidad += 1;
+    alert(
+      `Se agregó otro "${productoEncontrado.nombre}" al carrito. Total: ${productoExistente.cantidad}`
+    );
+  } else {
+    productoEncontrado.cantidad = 1;
+    carritoDeCompras.push(productoEncontrado);
+    alert(`Producto "${productoEncontrado.nombre}" agregado al carrito.`);
+  }
+}
+
+function buscarProductoPorId(id) {
+  const productoEncontrado = productos.find((producto) => producto.id === id);
+  return productoEncontrado;
+}
+
+let botonCarrito = document.getElementById("carrito");
+
+botonCarrito.addEventListener("click", verCarrito);
+
+function verCarrito() {
+  let mensaje = "Productos seleccionados:\n";
+  let total = 0;
+  carritoDeCompras.forEach(function (producto) {
+    mensaje +=
+      producto.cantidad +
+      " un. " +
+      producto.nombre +
+      " = $" +
+      producto.cantidad * producto.precio +
+      "\n";
+    total += producto.cantidad * producto.precio;
+  });
+
+  mensaje += "\n" + "Total: $" + total;
+
+  alert(mensaje);
+}

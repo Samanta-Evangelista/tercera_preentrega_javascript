@@ -8,13 +8,10 @@ header {
 .logo {
   font-size: 44px;
   background: linear-gradient(to right, #8b4513, #ffa500);
+  background-clip: inherit;
   -webkit-background-clip: text;
   color: transparent;
   font-weight: bold;
-}
-
-.cart-button {
-  order: 1;
 }
 
 .btn-orange {
@@ -24,8 +21,8 @@ header {
 }
 
 .btn-orange:hover {
-  background-color: #ffa500;
-  border-color: #ffa500;
+  background-color: #622a02;
+  border-color: #622a02;
   color: #fff;
 }
 
@@ -46,12 +43,16 @@ main {
   flex-direction: column;
   align-items: center;
   width: 350px;
-  height: 340px;
-  border: 2px solid black;
+  height: 350px;
+  border: 2px solid #8b4513;
   border-radius: 10px;
   margin: 2px;
   padding: 15px 0px;
-  background-color: rgb(233, 184, 111);
+  background-color: #fff;
+}
+
+.tarjeta h3 {
+  color: #8b4513;
 }
 
 .footer {
